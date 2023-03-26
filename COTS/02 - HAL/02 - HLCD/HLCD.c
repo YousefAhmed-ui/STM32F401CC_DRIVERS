@@ -16,8 +16,8 @@ typedef enum{
 
 static void LCD_voidSendCommand(u8 Copy_u8Command , u8 Copy_u8RWValue , u8 Copy_u8RSValue);
 static void LCD_voidSetEnable(u8 Copy_u8Value);
-static void LCD_voidInitProcess();
-static void LCD_voidWriteProcess();
+static void LCD_voidInitProcess(void);
+static void LCD_voidWriteProcess(void);
 
 
 static LCD_enuInit_t        LCD_enuInitState   = LCD_enuInitStart;
