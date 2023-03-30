@@ -77,7 +77,6 @@ typedef enum{
     uart_Ok,
     uart_NotOk,
     uart_NullPtr,
-    uart_Busy
 }UART_enuError_t;
 
 
