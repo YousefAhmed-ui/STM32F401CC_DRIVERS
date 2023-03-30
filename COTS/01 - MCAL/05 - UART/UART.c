@@ -88,6 +88,8 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
                 Local_u16TmpMantissa += (Local_u16TmpFraction & 0xF0);         
             }
 
+            ((UART_t *)(UART_cfg ->uart_Channel)) -> BRR = ((Local_u16TmpMantissa << 4) | (Local_u16TmpFraction & 0x07));
+
         }else{
 
             Local_u32TmpValue = ((u64)(F_CLK) * 1000UL)/(16UL * UART_cfg -> BaudRate);
@@ -101,10 +103,12 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
             if(Local_u16TmpFraction > 0xF){
 
                 Local_u16TmpMantissa += (Local_u16TmpFraction & 0xF0);         
-            }            
+            }
+
+            ((UART_t *)(UART_cfg ->uart_Channel)) -> BRR = ((Local_u16TmpMantissa << 4) | (Local_u16TmpFraction & 0x0F));            
         }
                     
-            ((UART_t *)(UART_cfg ->uart_Channel)) -> BRR = ((Local_u16TmpMantissa << 4) | (Local_u16TmpFraction & 0x0F));
+            
 
             Local_u32TmpCr1 = ((UART_t *)(UART_cfg ->uart_Channel))-> CR1; 
 
