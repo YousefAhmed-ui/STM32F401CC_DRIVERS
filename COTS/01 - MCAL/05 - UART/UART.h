@@ -80,21 +80,6 @@ typedef enum{
     uart_Busy
 }UART_enuError_t;
 
-typedef struct{
-    u8 *TxBuffer;
-    u32 TxSize;
-    u32 TxIdx;
-    void* Uart_Channel;
-}UART_Send_cfg_t;
-
-typedef struct{
-    u8 *RxBuffer;
-    u32 RxSize;
-    u32 RxIdx;
-    void* Uart_Channel;
-}UART_Reciever_cfg_t;
-
-
 
 typedef enum{
     uart1_Channel,
@@ -102,6 +87,44 @@ typedef enum{
     uart6_Channel,
     uart_ChannelNum
 }UART_channel_t;
+
+
+typedef struct{
+    u8 *TxBuffer;
+    u32 TxSize;
+    u32 TxIdx;
+    UART_channel_t Uart_Channel;
+    void* Uart;
+}UART_Send_cfg_t;
+
+typedef struct{
+    u8 *RxBuffer;
+    u32 RxSize;
+    u32 RxIdx;
+    UART_channel_t Uart_Channel;
+    void* Uart;
+}UART_Reciever_cfg_t;
+
+typedef enum{
+    uart_Idle,
+    uart_Busy
+}UART_enuState;
+
+
+typedef enum{
+    Tx_Idle,
+    Tx_Busy
+}TX_enuState;
+
+typedef enum{
+    Rx_Idle,
+    Rx_Busy
+}RX_enuState;
+
+typedef enum{
+    uart_Transmit,
+    uart_Recieve
+}UART_Mode_t;
 
 typedef void (*Uart_cbf)(void);
 
@@ -128,7 +151,7 @@ extern UART_enuError_t uart_RecieveBufferAsych(UART_Reciever_cfg_t * Reciever_cf
 /* Inputs  : void                                                                                                        */
 /* Return :  void                                                                                                        */
 /*************************************************************************************************************************/
-extern UART_enuError_t uart_RegisterCallBackFunction(UART_channel_t Copy_enuChannel , Uart_cbf CallBackFunction);
+extern UART_enuError_t uart_RegisterCallBackFunction(UART_channel_t Copy_enuChannel , UART_Mode_t Copy_enuMode  , Uart_cbf CallBackFunction);
 
 
 
