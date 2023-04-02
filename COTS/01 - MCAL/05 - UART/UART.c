@@ -79,7 +79,7 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
 
             Local_u16TmpFraction = ((Local_u32TmpValue % 1000) * 8) ;
 
-            Local_u16TmpFraction = (u16)(my_ciel((f32)(Local_u16TmpFraction / 1000)));
+            Local_u16TmpFraction = (u16)(my_ciel((f32)((f32)Local_u16TmpFraction / (f32)1000)));
 
             Local_u16TmpMantissa = Local_u32TmpValue / 1000;
 
@@ -87,8 +87,6 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
 
                 Local_u16TmpMantissa += (Local_u16TmpFraction & 0xF0);         
             }
-
-            ((UART_t *)(UART_cfg ->uart_Channel)) -> BRR = ((Local_u16TmpMantissa << 4) | (Local_u16TmpFraction & 0x07));
 
         }else{
 
@@ -96,19 +94,17 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
 
             Local_u16TmpFraction = ((Local_u32TmpValue % 1000) * 16) ;
 
-            Local_u16TmpFraction = (u16)(my_ciel((f32)(Local_u16TmpFraction / 1000)));
+            Local_u16TmpFraction = (u16)(my_ciel((f32)((f32)Local_u16TmpFraction / (f32)1000)));
 
             Local_u16TmpMantissa = Local_u32TmpValue / 1000;
 
             if(Local_u16TmpFraction > 0xF){
 
                 Local_u16TmpMantissa += (Local_u16TmpFraction & 0xF0);         
-            }
-
-            ((UART_t *)(UART_cfg ->uart_Channel)) -> BRR = ((Local_u16TmpMantissa << 4) | (Local_u16TmpFraction & 0x0F));            
+            }            
         }
                     
-            
+            ((UART_t *)(UART_cfg ->uart_Channel)) -> BRR = ((Local_u16TmpMantissa << 4) | (Local_u16TmpFraction & 0x0F));
 
             Local_u32TmpCr1 = ((UART_t *)(UART_cfg ->uart_Channel))-> CR1; 
 
@@ -139,7 +135,7 @@ UART_enuError_t uart_SendBufferAsynchZeroCopy(const UART_Send_cfg_t * Send_cfg)
         Local_enuRes = uart_NotOk;
     
     }else{
-        if(uart_TxBusyFlag == Tx_Idle)
+        if(uart_TxBusyFlag[Send_cfg->Uart_Channel] == uart_Idle)
         {
             uart_Txbuffer[Send_cfg->Uart_Channel] = Send_cfg->TxBuffer;
 
@@ -162,10 +158,12 @@ UART_enuError_t uart_SendBufferAsynchZeroCopy(const UART_Send_cfg_t * Send_cfg)
             Local_enuRes = uart_Busy;
         }
 
-    return Local_enuRes;
+
 
     }
 
+
+    return Local_enuRes;
  
 }
 
