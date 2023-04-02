@@ -13,8 +13,8 @@ int main(void)
 	rcc_selectSysClock(rcc_HSE);
 	rcc_EnableAHB1Preipherals(rcc_AHB1_GPIOC);
 	//rcc_controlPrescalerAHB(rcc_AHB_CLK_DIVIDED_BY_);
-	//led_Init();
-	//led_SetState( LED_Start , led_STATE_ON);
+	led_Init();
+	led_SetState( LED_Start , led_STATE_ON);
 	while(1)
 	{
 

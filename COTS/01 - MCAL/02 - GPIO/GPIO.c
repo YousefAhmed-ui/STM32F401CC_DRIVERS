@@ -44,7 +44,11 @@ typedef struct{
 #define TYPE_SHIFT_MASK            2
 #define REGISTER_OFFSET            2
 #define MAX_PIN_CONFIG             65536
-#define BSRR_RESET_OFFSET               16
+#define BSRR_RESET_OFFSET          16
+#define AF_REG_MASK                0x08
+#define AF_REG_OFFSET              4
+#define REG_SIZE                   32
+
 
 GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 {
@@ -54,6 +58,7 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
     u32 Local_u32PUPReg = 0;
     u16 Local_u16Pin = 0;
     u8 Local_u8Iterator = 0;
+    u32 Local_u32AF_Reg = 0;
     if(Addp_PortInit -> GPIO_Port > MAX_PORT_NUM)
     {
         Local_enuErrorStatus = GPIO_NotOk;
@@ -89,6 +94,27 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         GPIOA -> OSPEEDR |= ((Addp_PortInit -> GPIO_Speed) << Local_u8Iterator * REGISTER_OFFSET);
 
+                        if(Addp_PortInit->GPIO_AlternateFunction){
+
+                        	if(Local_u8Iterator < 7){
+
+                        		Local_u32AF_Reg = GPIOA->AFRL;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << (Local_u8Iterator * AF_REG_OFFSET));
+
+                        		GPIOA->AFRL = Local_u32AF_Reg;
+
+                        	}else{
+
+                        		Local_u32AF_Reg = GPIOA->AFRH;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << ((Local_u8Iterator * AF_REG_OFFSET)-REG_SIZE));
+
+                        		GPIOA->AFRH = Local_u32AF_Reg;
+
+                        	}
+                        }
+
                     break;
 
                     case GPIO_PORTB :
@@ -104,6 +130,27 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         GPIOB -> OSPEEDR |= ((Addp_PortInit -> GPIO_Speed) << Local_u8Iterator * REGISTER_OFFSET);
 
+                        if(Addp_PortInit->GPIO_AlternateFunction){
+
+                        	if(Local_u8Iterator < 7){
+
+                        		Local_u32AF_Reg = GPIOB->AFRL;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << (Local_u8Iterator * AF_REG_OFFSET));
+
+                        		GPIOB->AFRL = Local_u32AF_Reg;
+
+                        	}else{
+
+                        		Local_u32AF_Reg = GPIOB->AFRH;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << ((Local_u8Iterator * AF_REG_OFFSET)-REG_SIZE));
+
+                        		GPIOB->AFRH = Local_u32AF_Reg;
+
+                        	}
+                        }
+
                     break;
 
                     case GPIO_PORTC :
@@ -117,6 +164,27 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
                         GPIOC -> PUPDR |=(Local_u32PUPReg << Local_u8Iterator * REGISTER_OFFSET);
 
                         GPIOC -> OSPEEDR |= ((Addp_PortInit -> GPIO_Speed) << Local_u8Iterator * REGISTER_OFFSET);
+
+                        if(Addp_PortInit->GPIO_AlternateFunction){
+
+                        	if(Local_u8Iterator < 7){
+
+                        		Local_u32AF_Reg = GPIOC->AFRL;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << (Local_u8Iterator * AF_REG_OFFSET));
+
+                        		GPIOD->AFRL = Local_u32AF_Reg;
+
+                        	}else{
+
+                        		Local_u32AF_Reg = GPIOC->AFRH;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << ((Local_u8Iterator * AF_REG_OFFSET)-REG_SIZE));
+
+                        		GPIOD->AFRH = Local_u32AF_Reg;
+
+                        	}
+                        }
 
                     break;
 
@@ -133,6 +201,30 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         GPIOD -> OSPEEDR |= ((Addp_PortInit -> GPIO_Speed) << Local_u8Iterator * REGISTER_OFFSET);
 
+                        if(Addp_PortInit->GPIO_AlternateFunction){
+
+                        	if(Local_u8Iterator < 7){
+
+                        		Local_u32AF_Reg = GPIOD->AFRL;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << (Local_u8Iterator * AF_REG_OFFSET));
+
+                        		GPIOD->AFRL = Local_u32AF_Reg;
+
+                        	}else{
+
+                        		Local_u32AF_Reg = GPIOD->AFRH;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << ((Local_u8Iterator * AF_REG_OFFSET)-REG_SIZE));
+
+                        		GPIOD->AFRH = Local_u32AF_Reg;
+
+                        	}
+
+
+
+                        }
+
                     break;
 
                     case GPIO_PORTE :
@@ -147,6 +239,28 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
                         GPIOE -> PUPDR |=(Local_u32PUPReg << Local_u8Iterator * REGISTER_OFFSET);
 
                         GPIOE -> OSPEEDR |= ((Addp_PortInit -> GPIO_Speed) << Local_u8Iterator * REGISTER_OFFSET);
+
+                        if(Addp_PortInit->GPIO_AlternateFunction){
+
+                        	if(Local_u8Iterator < 7){
+
+                        		Local_u32AF_Reg = GPIOE->AFRL;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << (Local_u8Iterator * AF_REG_OFFSET));
+
+                        		GPIOE->AFRL = Local_u32AF_Reg;
+
+                        	}else{
+
+                        		Local_u32AF_Reg = GPIOE->AFRH;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << ((Local_u8Iterator * AF_REG_OFFSET)-REG_SIZE));
+
+                        		GPIOE->AFRH = Local_u32AF_Reg;
+
+                        	}
+
+                        }
 
                     break;
 
@@ -163,6 +277,27 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         GPIOH -> OSPEEDR |= ((Addp_PortInit -> GPIO_Speed) << Local_u8Iterator * REGISTER_OFFSET);
 
+                        if(Addp_PortInit->GPIO_AlternateFunction){
+
+                        	if(Local_u8Iterator < 7){
+
+                        		Local_u32AF_Reg = GPIOH->AFRL;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << (Local_u8Iterator * AF_REG_OFFSET));
+
+                        		GPIOH->AFRL = Local_u32AF_Reg;
+
+                        	}else{
+
+                        		Local_u32AF_Reg = GPIOH->AFRH;
+
+                        		Local_u32AF_Reg |= ((Addp_PortInit->GPIO_AlternateFunction) << ((Local_u8Iterator * AF_REG_OFFSET)-REG_SIZE));
+
+                        		GPIOH->AFRH = Local_u32AF_Reg;
+
+                        	}
+
+                        }
                     break;
 
                 }//switch

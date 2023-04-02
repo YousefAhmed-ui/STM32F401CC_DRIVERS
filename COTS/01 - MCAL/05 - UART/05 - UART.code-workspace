@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../00 - LIBRARIES"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.C": "c",
+			"uart.h": "c"
+		}
+	}
+}
