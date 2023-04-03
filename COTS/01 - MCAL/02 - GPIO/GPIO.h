@@ -6,7 +6,7 @@
 
 #include "STD_TYPES.h"
 #include "BIT_MATH.h"
-
+#include "BIT_BAND.h"
 /*********************************************Masks******************************************************************/
 
 #define GPIO_PORTA                               0
@@ -72,6 +72,20 @@
 #define gpio_PIN14                              (u16)(0x4000)
 #define gpio_PIN15                              (u16)(0x8000)
 
+#define gpio_AF0_System                         0b0000
+#define gpio_AF1_TIM1_TIM2						0b0001
+#define gpio_AF2_TIM3_4_5                       0b0010
+#define gpio_AF3_TIM9_10_11                     0b0011
+#define gpio_AF4_I2C1_2_3                       0b0100
+#define gpio_AF5_SPI1_2_3_4                     0b0101
+#define gpio_AF6_SPI3                           0b0110
+#define gpio_AF7_USART1_2                       0b0111
+#define gpio_AF8_USART6                         0b1000
+#define gpio_AF9_I2C2_3                         0b1001
+#define gpio_AF10_OTG_FS                        0b1010
+#define gpio_AF12_SDIO                          0b1100
+#define gpio_AF15_EVENTOUT                      0b1111
+
 #define MAX_PORT_NUM                            5
 #define MAX_PIN_COUNT                           65536
 #define GPIO_PIN_NUM                            16 
@@ -84,6 +98,7 @@ typedef struct {
     u8 GPIO_Port;
     u8 GPIO_Speed;
     u16 GPIO_Pin;
+    u8 GPIO_AlternateFunction;
 }GPIO_strInit_t;
 
 

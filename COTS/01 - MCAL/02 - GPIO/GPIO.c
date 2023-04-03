@@ -5,6 +5,7 @@
 /*************************************************************************************************************************/ 
 #include "GPIO.h"
 
+
 typedef struct{
     u32 MODER;
     u32 OTYPER;
@@ -335,12 +336,13 @@ GPIO_enuErrorStatus_t gpio_SetPinValue( void * Copy_voidPtrPort , u16 Copy_u16Pi
             {
                 if( Copy_u8PinValue == GPIO_SET_VALUE)
                 {
-                    ((GPIOReg_t *)Copy_voidPtrPort) -> BSRR |= (1<<Local_u8Iterator);
+                	MEM_ADDR(BIT_BAND((u32)&(((GPIOReg_t *)Copy_voidPtrPort)->BSRR) , Local_u8Iterator)) = GPIO_SET_VALUE;
                 }
                 else
                 {
-                    ((GPIOReg_t *)Copy_voidPtrPort) -> BSRR |= (1<<Local_u8Iterator+BSRR_RESET_OFFSET);
-                } 
+                	MEM_ADDR(BIT_BAND((u32)&(((GPIOReg_t *)Copy_voidPtrPort)->BSRR) , (Local_u8Iterator+BSRR_RESET_OFFSET))) = GPIO_SET_VALUE;
+                }
+
                 //switch( Copy_u8Port )
                 //{
                 //    case GPIO_PORTA :
