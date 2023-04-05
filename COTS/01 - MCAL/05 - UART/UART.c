@@ -67,7 +67,7 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
     u16 Local_u16TmpMantissa = 0;
     u16 Local_u16TmpFraction = 0;
     u32 Local_u32TmpCr1 = 0;
-
+    u32 Local_u32TmpCr2 = 0;
     if(UART_cfg == NULL)
     {
         Local_enuRes = uart_NullPtr;
@@ -113,6 +113,12 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
             Local_u32TmpCr1 = UART_cfg->OverSampling | UART_cfg->Parity | UART_cfg->Parity_Select | UART_cfg->RecieverEnable | UART_cfg->TrasmitterEnable | UART_cfg->Word_Length | UART_cfg->Uart_enable;
 
             ((UART_t *)(UART_cfg ->uart_Channel))-> CR1 = Local_u32TmpCr1;
+
+            Local_u32TmpCr2 = ((UART_t*)(UART_cfg->uart_Channel))->CR2;
+
+            Local_u32TmpCr2 |= UART_cfg->StopBitsNumber;
+
+            ((UART_t*)(UART_cfg->uart_Channel))->CR2 = Local_u32TmpCr2;
 
             Interrupt.Transmit_Compelete = UART_cfg->TransmitionComplete_Int;
 

@@ -54,6 +54,7 @@
 #define uart_RECIEVER_ENABLE                     0x00000004
 #define uart_RECIEVER_DISABLE                    0x00000000
 
+
 #define uart_STOP_BIT_1                          0x00000000
 #define uart_STOP_BIT_HALF                       0x00001000
 #define uart_STOP_BIT_2                          0x00002000
@@ -133,25 +134,25 @@ typedef enum{
 typedef void (*Uart_cbf)(void);
 
 /*************************************************************************************************************************/
-/* FunctionDiscription  :                                                                                                */
+/* FunctionDiscription  : Starts the the Systick                                                                         */
 /* Inputs  : void                                                                                                        */
 /* Return :  void                                                                                                        */
 /*************************************************************************************************************************/ 
 extern UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg );
 /*************************************************************************************************************************/
-/* FunctionDiscription  :                                                                                                */
+/* FunctionDiscription  : Starts the the Systick                                                                         */
 /* Inputs  : void                                                                                                        */
 /* Return :  void                                                                                                        */
 /*************************************************************************************************************************/ 
 extern UART_enuError_t uart_SendBufferAsynchZeroCopy(const UART_Send_cfg_t * Send_cfg);
 /*************************************************************************************************************************/
-/* FunctionDiscription  :                                                                                                */
+/* FunctionDiscription  : Starts the the Systick                                                                         */
 /* Inputs  : void                                                                                                        */
 /* Return :  void                                                                                                        */
 /*************************************************************************************************************************/ 
 extern UART_enuError_t uart_RecieveBufferAsych(UART_Reciever_cfg_t * Reciever_cfg);
 /*************************************************************************************************************************/
-/* FunctionDiscription  :                                                                                                */
+/* FunctionDiscription  : Starts the the Systick                                                                         */
 /* Inputs  : void                                                                                                        */
 /* Return :  void                                                                                                        */
 /*************************************************************************************************************************/
