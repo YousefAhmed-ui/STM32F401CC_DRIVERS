@@ -56,11 +56,12 @@ typedef enum{
 
 typedef struct{
 
-    struct{             
+    struct{                 
     UART_cfg_t uart_cfg[uart_ChannelNum];
     GPIO_strInit_t uart_Tx_Pin[uart_ChannelNum];
     GPIO_strInit_t uart_Rx_Pin[uart_ChannelNum];
     }UART;
+
 }CHAT_HANDLER_cfg_t;
 
 #define CHANNEL     UART

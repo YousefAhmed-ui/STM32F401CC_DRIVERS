@@ -14,7 +14,7 @@ static UART_Send_cfg_t Uart_Send_cfg[uart_ChannelNum];
 
 static UART_channel_t Uart_Channel;
 
-extern const CHAT_HANDLER_cfg_t CHAT_cfg[Number_Of_Channels];
+extern const CHAT_HANDLER_cfg_t CHAT_cfg;
 
 
 void chat_handler_Init(void)
@@ -25,11 +25,11 @@ void chat_handler_Init(void)
 
         for(Local_u8Idx = 0 ; Local_u8Idx < uart_ChannelNum ; Local_u8Idx++){
 
-            uart_voidInit(&CHAT_cfg[UART].uart_cfg[Local_u8Idx]);
+            uart_voidInit(&CHAT_cfg.UART.uart_cfg[Local_u8Idx]);
 
-            gpio_Init(&CHAT_cfg[UART].uart_Rx_Pin[Local_u8Idx]);
+            gpio_Init(&CHAT_cfg.UART.uart_Rx_Pin[Local_u8Idx]);
 
-            gpio_Init(&CHAT_cfg[UART].uart_Tx_Pin[Local_u8Idx]);
+            gpio_Init(&CHAT_cfg.UART.uart_Tx_Pin[Local_u8Idx]);
 
         }
 
@@ -65,13 +65,13 @@ CHAT_HANDLER_Error_t chat_handler_SendMessage(u8 *Addp_Message , u8 Channel , u8
                 Local_u16Iterator++;
             }
 
-            Uart_Send_cfg[CHAT_cfg[Channel].uart_cfg[Copy_u8ChannelNum].uart_channel].TxBuffer = Addp_Message;
+            Uart_Send_cfg[CHAT_cfg.UART.uart_cfg[Copy_u8ChannelNum].Uart_Channel].TxBuffer = Addp_Message;
 
             Uart_Send_cfg[Copy_u8ChannelNum].TxIdx = 0;
 
             Uart_Send_cfg[Copy_u8ChannelNum].TxSize = (Local_u16Iterator+1);
 
-            Uart_Send_cfg[Copy_u8ChannelNum].Uart = CHAT_cfg[Channel].uart_cfg[Copy_u8ChannelNum].uart_voidPtr;
+            Uart_Send_cfg[Copy_u8ChannelNum].Uart = CHAT_cfg.UART.uart_cfg[Copy_u8ChannelNum].uart_voidPtr;
 
             Uart_Send_cfg[Copy_u8ChannelNum].Uart_Channel = Copy_u8ChannelNum;
 

@@ -13,6 +13,7 @@
 const CHAT_HANDLER_cfg_t CHAT_cfg = {
 
     .UART = {
+        
         .uart_cfg[uart2_Channel] = {
             .uart_voidPtr = UART2,
             .OverSampling = uart_OVERSAMPLING_MODE_BY_16,
@@ -28,7 +29,9 @@ const CHAT_HANDLER_cfg_t CHAT_cfg = {
             .RecieverEnable = uart_RECIEVER_ENABLE,
             .BaudRate = (u32)9600,
             .StopBitsNumber = uart_STOP_BIT_1,
+            .Uart_Channel = uart2_Channel
         },
+
         .uart_Rx_Pin[uart2_Channel] = {
             .GPIO_Mode = UART2_TX_MODE,
             .GPIO_Pin = UART2_TX_PIN,
@@ -36,6 +39,7 @@ const CHAT_HANDLER_cfg_t CHAT_cfg = {
             .GPIO_Speed = UART2_TX_SPEED,
             .GPIO_AlternateFunction = UART2_TX_ALTERNATEFUNC,
         },
+
         .uart_Rx_Pin[uart2_Channel] = {
             .GPIO_Mode = UART2_RX_MODE,
             .GPIO_Pin = UART2_RX_PIN,

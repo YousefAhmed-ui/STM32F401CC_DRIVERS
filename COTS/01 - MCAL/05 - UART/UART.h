@@ -75,7 +75,8 @@ typedef struct{
     u32 TrasmitterEnable;
     u32 RecieverEnable;
     u32 BaudRate;
-    u32 StopBitsNumber;          
+    u32 StopBitsNumber;
+    UART_channel_t Uart_Channel;           
 }UART_cfg_t;
 
 typedef enum{
