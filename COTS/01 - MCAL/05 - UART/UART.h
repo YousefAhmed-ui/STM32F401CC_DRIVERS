@@ -62,7 +62,7 @@
 #define F_CLK                                   (u32)16000000
 
 typedef struct{
-    void* uart_Channel;
+    void* uart_voidPtr;
     u32 OverSampling;
     u32 Uart_enable;
     u32 Word_Length;

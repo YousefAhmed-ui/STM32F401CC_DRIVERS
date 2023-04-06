@@ -54,10 +54,13 @@ typedef enum{
     Number_Of_Channels
 }CHAT_HANDLER_Channel_t;
 
-typedef struct{             
-    UART_cfg_t uart_cfg;
-    GPIO_strInit_t uart_Tx_Pin;
-    GPIO_strInit_t uart_Rx_Pin;
+typedef struct{
+
+    struct{             
+    UART_cfg_t uart_cfg[uart_ChannelNum];
+    GPIO_strInit_t uart_Tx_Pin[uart_ChannelNum];
+    GPIO_strInit_t uart_Rx_Pin[uart_ChannelNum];
+    }UART;
 }CHAT_HANDLER_cfg_t;
 
 #define CHANNEL     UART

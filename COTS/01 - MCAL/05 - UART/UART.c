@@ -104,21 +104,21 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
             }            
         }
                     
-            ((UART_t *)(UART_cfg ->uart_Channel)) -> BRR = ((Local_u16TmpMantissa << 4) | (Local_u16TmpFraction & 0x0F));
+            ((UART_t *)(UART_cfg ->uart_voidPtr)) -> BRR = ((Local_u16TmpMantissa << 4) | (Local_u16TmpFraction & 0x0F));
 
-            Local_u32TmpCr1 = ((UART_t *)(UART_cfg ->uart_Channel))-> CR1; 
+            Local_u32TmpCr1 = ((UART_t *)(UART_cfg ->uart_voidPtr))-> CR1; 
 
             Local_u32TmpCr1 = 0;
 
             Local_u32TmpCr1 = UART_cfg->OverSampling | UART_cfg->Parity | UART_cfg->Parity_Select | UART_cfg->RecieverEnable | UART_cfg->TrasmitterEnable | UART_cfg->Word_Length | UART_cfg->Uart_enable;
 
-            ((UART_t *)(UART_cfg ->uart_Channel))-> CR1 = Local_u32TmpCr1;
+            ((UART_t *)(UART_cfg ->uart_voidPtr))-> CR1 = Local_u32TmpCr1;
 
-            Local_u32TmpCr2 = ((UART_t*)(UART_cfg->uart_Channel))->CR2;
+            Local_u32TmpCr2 = ((UART_t*)(UART_cfg->uart_voidPtr))->CR2;
 
             Local_u32TmpCr2 |= UART_cfg->StopBitsNumber;
 
-            ((UART_t*)(UART_cfg->uart_Channel))->CR2 = Local_u32TmpCr2;
+            ((UART_t*)(UART_cfg->uart_voidPtr))->CR2 = Local_u32TmpCr2;
 
             Interrupt.Transmit_Compelete = UART_cfg->TransmitionComplete_Int;
 
@@ -126,7 +126,7 @@ UART_enuError_t uart_voidInit(UART_cfg_t* UART_cfg )
 
             Interrupt.Recieve_Reg_Full_Int = UART_cfg->RecieverDataReisterNotEmpty_Int;
 
-            ((UART_t *)(UART_cfg ->uart_Channel))-> SR = 0;  
+            ((UART_t *)(UART_cfg ->uart_voidPtr))-> SR = 0;  
     }
     return Local_enuRes;
     
