@@ -41,7 +41,7 @@ void chat_handler_Init(void)
     #endif
 }
 
-CHAT_HANDLER_Error_t chat_handler_SendMessage(u8 *Addp_Message , u8 Channel , u8 Copy_u8ChannelNum , chat_handler_cbf Notify)
+CHAT_HANDLER_Error_t chat_handler_SendMessage(u8 *Addp_Message , u8 Copy_u8ChannelNum , chat_handler_cbf Notify)
 {
 
     #if CHANNEL == UART
@@ -76,6 +76,8 @@ CHAT_HANDLER_Error_t chat_handler_SendMessage(u8 *Addp_Message , u8 Channel , u8
             Uart_Send_cfg[Copy_u8ChannelNum].Uart_Channel = Copy_u8ChannelNum;
 
             uart_SendBufferAsynchZeroCopy(&Uart_Send_cfg);
+
+            uart_RegisterCallBackFunction(Copy_u8ChannelNum , uart_Transmit , Notify);
 
 
         }
