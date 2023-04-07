@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "04 - TEMP_SENSOR"
+		},
+		{
+			"path": "05 - ANALOG_DIV_IN"
+		},
+		{
+			"path": "06 - ADC_MX1000"
+		},
+		{
+			"path": "../01 - MCAL/06 - ADC"
+		},
+		{
+			"path": "../01 - MCAL/02 - GPIO"
+		}
+	],
+	"settings": {}
+}
