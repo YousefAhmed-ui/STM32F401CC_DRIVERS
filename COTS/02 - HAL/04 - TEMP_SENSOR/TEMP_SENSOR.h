@@ -32,7 +32,12 @@ typedef enum{
 /* Inputs   :                                                                                                            */
 /* Return   : Error_status either ok or not                                                                              */
 /*************************************************************************************************************************/
-extern TEMP_SENSOR_ERROR_t temp_sensor_GetTemp(u16 * Addp_Temp);
-
+extern TEMP_SENSOR_ERROR_t temp_sensor_GetTempInternal(u16 * Addp_Temp);
+/*************************************************************************************************************************/
+/* Function_Description :                                                                                                */
+/* Inputs   :                                                                                                            */
+/* Return   : Error_status either ok or not                                                                              */
+/*************************************************************************************************************************/
+extern TEMP_SENSOR_ERROR_t temp_sensor_GetTempExternal(u16 * Addp_Temp);
 
 #endif /*TEMP_SENSOR_H*/

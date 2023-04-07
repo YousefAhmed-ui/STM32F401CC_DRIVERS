@@ -11,17 +11,6 @@
 #include "ADC.h"
 #include "GPIO.h"
 
-
-#define ADC_INTERNAL                0
-#define ADC_EXTERNAL                1
-
-
-/*
-    ADC_INTERNAL
-    ADC_EXTERNAL  */
-
-#define ADC   ADC_INTERNAL
-
 typedef struct{
 
     struct{

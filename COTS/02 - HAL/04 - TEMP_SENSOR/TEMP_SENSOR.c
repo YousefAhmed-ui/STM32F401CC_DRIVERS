@@ -10,12 +10,12 @@
 #include "TEMP_SENSOR.h"
 
 
-TEMP_SENSOR_ERROR_t temp_sensor_GetTemp(u16 * Addp_Temp)
+TEMP_SENSOR_ERROR_t temp_sensor_GetTempInternal(u16 * Addp_Temp)
 {
-    #if ADC == ADC_INTERNAL
-         adc_GetValueAsync(  Addp_Temp , NULL);
-    #endif
-    #if ADC == ADC_EXTERNAL
-        adc_MX1000_GetValueAsync( Addp_Temp , NULL );
-    #endif    
+    adc_GetValueAsync( Addp_Temp);
+   
+}
+TEMP_SENSOR_ERROR_t temp_sensor_GetTempExternal(u16 * Addp_Temp)
+{
+    adc_MX1000_GetValueSync( Addp_Temp);
 }
