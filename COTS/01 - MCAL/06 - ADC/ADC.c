@@ -41,3 +41,10 @@ typedef struct{
 #define adc_INJECTED_CHANNEL_END_OF_CONV_MASK    0x00000004
 #define adc_REGULAR_CHANNEL_END_OF_CONV_MASK     0x00000002
 #define adc_ANALOG_WD_MASK                       0x00000001
+
+
+
+void adc_Init(ADC_config_t * Addp_Adc_Config)
+{
+    
+}
