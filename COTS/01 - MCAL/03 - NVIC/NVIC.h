@@ -34,91 +34,91 @@
 
 
 typedef enum{
-   nvic_IRQ_0,
-   nvic_IRQ_1,
-   nvic_IRQ_2,
-   nvic_IRQ_3,
-   nvic_IRQ_4,
-   nvic_IRQ_5,
-   nvic_IRQ_6,
-   nvic_IRQ_7,
-   nvic_IRQ_8,
-   nvic_IRQ_9,
-   nvic_IRQ_10,
-   nvic_IRQ_11,
-   nvic_IRQ_12,
-   nvic_IRQ_13,
-   nvic_IRQ_14,
-   nvic_IRQ_15,
-   nvic_IRQ_16,
-   nvic_IRQ_17,
-   nvic_IRQ_18,
-   nvic_IRQ_19,
-   nvic_IRQ_20,
-   nvic_IRQ_21,
-   nvic_IRQ_22,
-   nvic_IRQ_23,
-   nvic_IRQ_24,
-   nvic_IRQ_25,
-   nvic_IRQ_26,
-   nvic_IRQ_27,
-   nvic_IRQ_28,
-   nvic_IRQ_29,
-   nvic_IRQ_30,
-   nvic_IRQ_31,
-   nvic_IRQ_32,
-   nvic_IRQ_33,
-   nvic_IRQ_34,
-   nvic_IRQ_35,
-   nvic_IRQ_36,
-   nvic_IRQ_37,
-   nvic_IRQ_38,
-   nvic_IRQ_39,
-   nvic_IRQ_40,
-   nvic_IRQ_41,
-   nvic_IRQ_42,
-   nvic_IRQ_43,
-   nvic_IRQ_44,
-   nvic_IRQ_45,
-   nvic_IRQ_46,
-   nvic_IRQ_47,
-   nvic_IRQ_48,
-   nvic_IRQ_49,
-   nvic_IRQ_50,
-   nvic_IRQ_51,
-   nvic_IRQ_52,
-   nvic_IRQ_53,
-   nvic_IRQ_54,
-   nvic_IRQ_55,
-   nvic_IRQ_56,
-   nvic_IRQ_57,
-   nvic_IRQ_58,
-   nvic_IRQ_59,
-   nvic_IRQ_60,
-   nvic_IRQ_61,
-   nvic_IRQ_62,
-   nvic_IRQ_63,
-   nvic_IRQ_64,
-   nvic_IRQ_65,
-   nvic_IRQ_66,
-   nvic_IRQ_67,
-   nvic_IRQ_68,
-   nvic_IRQ_69,
-   nvic_IRQ_70,
-   nvic_IRQ_71,
-   nvic_IRQ_72,
-   nvic_IRQ_73,
-   nvic_IRQ_74,
-   nvic_IRQ_75,
-   nvic_IRQ_76,
-   nvic_IRQ_77,
-   nvic_IRQ_78,
-   nvic_IRQ_79,
-   nvic_IRQ_80,
-   nvic_IRQ_81,
-   nvic_IRQ_82,
-   nvic_IRQ_83,
-   nvic_IRQ_84,
+   nvic_IRQ_0,    //WWDG
+   nvic_IRQ_1,    //EXTI16/PVD
+   nvic_IRQ_2,    //EXTI21/TAMP_STAMP
+   nvic_IRQ_3,    //EXTI22/RTC_WKUP
+   nvic_IRQ_4,    //FLASH
+   nvic_IRQ_5,    //RCC  
+   nvic_IRQ_6,    //EXTI0
+   nvic_IRQ_7,    //EXTI1
+   nvic_IRQ_8,    //EXTI2
+   nvic_IRQ_9,    //EXTI3
+   nvic_IRQ_10,   //EXTI4
+   nvic_IRQ_11,   //DMA1_Stream0
+   nvic_IRQ_12,   //DMA1_Stream1
+   nvic_IRQ_13,   //DMA1_Stream2
+   nvic_IRQ_14,   //DMA1_Stream3
+   nvic_IRQ_15,   //DMA1_Stream4
+   nvic_IRQ_16,   //DMA1_Stream5
+   nvic_IRQ_17,   //DMA1_Stream6
+   nvic_IRQ_18,   //ADC
+   nvic_IRQ_19,   //
+   nvic_IRQ_20,   //
+   nvic_IRQ_21,   //
+   nvic_IRQ_22,   //
+   nvic_IRQ_23,   //EXTI9_5
+   nvic_IRQ_24,   //TIM1_BRK_TIM9
+   nvic_IRQ_25,   //TIM1_UP_TIM10
+   nvic_IRQ_26,   //TIM1_TRG_COM_TIM11
+   nvic_IRQ_27,   //TIM1_CC
+   nvic_IRQ_28,   //TIM2
+   nvic_IRQ_29,   //TIM3
+   nvic_IRQ_30,   //TIM4
+   nvic_IRQ_31,   //I2C1_EV
+   nvic_IRQ_32,   //I2C1_ER
+   nvic_IRQ_33,   //I2C2_EV
+   nvic_IRQ_34,   //I2C2_ER
+   nvic_IRQ_35,   //SPI1
+   nvic_IRQ_36,   //SPI2
+   nvic_IRQ_37,   //USART1
+   nvic_IRQ_38,   //USART2      
+   nvic_IRQ_39,   //
+   nvic_IRQ_40,   //EXTI15_10
+   nvic_IRQ_41,   //EXTI17 / RTC_Alarm
+   nvic_IRQ_42,   //EXTI18 /OTG_FS_WKUP
+   nvic_IRQ_43,   //
+   nvic_IRQ_44,   //
+   nvic_IRQ_45,   //
+   nvic_IRQ_46,   //
+   nvic_IRQ_47,   //DMA1_Stream7
+   nvic_IRQ_48,   //
+   nvic_IRQ_49,   //SDIO
+   nvic_IRQ_50,   //TIM5
+   nvic_IRQ_51,   //SPI3
+   nvic_IRQ_52,   //
+   nvic_IRQ_53,   //
+   nvic_IRQ_54,   //
+   nvic_IRQ_55,   //
+   nvic_IRQ_56,   //DMA2_Stream0
+   nvic_IRQ_57,   //DMA2_Stream1
+   nvic_IRQ_58,   //DMA2_Stream2
+   nvic_IRQ_59,   //DMA2_Stream3
+   nvic_IRQ_60,   //DMA2_Stream4
+   nvic_IRQ_61,   //
+   nvic_IRQ_62,   //
+   nvic_IRQ_63,   //
+   nvic_IRQ_64,   //
+   nvic_IRQ_65,   //
+   nvic_IRQ_66,   //
+   nvic_IRQ_67,   //OTG_FS
+   nvic_IRQ_68,   //DMA2_Stream5
+   nvic_IRQ_69,   //DMA2_Stream6
+   nvic_IRQ_70,   //DMA2_Stream7
+   nvic_IRQ_71,   //USART6
+   nvic_IRQ_72,   //I2C3_EV
+   nvic_IRQ_73,   //I2C3_ER
+   nvic_IRQ_74,   //
+   nvic_IRQ_75,   //
+   nvic_IRQ_76,   //
+   nvic_IRQ_77,   //
+   nvic_IRQ_78,   //
+   nvic_IRQ_79,   //
+   nvic_IRQ_80,   //
+   nvic_IRQ_81,   //FPU
+   nvic_IRQ_82,   //
+   nvic_IRQ_83,   //
+   nvic_IRQ_84,   //SPI4
    nvic_IRQ_85,
    nvic_IRQ_86,
    nvic_IRQ_87,
