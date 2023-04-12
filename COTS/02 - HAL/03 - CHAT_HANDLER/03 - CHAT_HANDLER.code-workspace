@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../01 - MCAL/05 - UART"
+		},
+		{
+			"path": "../../00 - LIBRARIES"
+		},
+		{
+			"path": "../../01 - MCAL/02 - GPIO"
+		}
+	],
+	"settings": {}
+}
