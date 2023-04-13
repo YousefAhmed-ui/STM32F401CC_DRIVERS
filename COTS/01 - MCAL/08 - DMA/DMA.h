@@ -201,6 +201,14 @@ typedef enum{
 }DMA_State_t;
 
 
+typedef enum{
+
+    dma_Tranfer_Compelete,
+    dma_Half_Tranfer_Compelete,
+    dma_Num_Of_Events
+
+}DMA_Event_t;
+
 typedef void (*DMA_cbf)(void);
 
 /*************************************************************************************************************************/
@@ -220,7 +228,7 @@ extern DMA_Error_t dma_ConfigChannel(Channel_Config_t* Channel_cfg );
 /* Inputs  : void                                                                                                        */
 /* Return :  void                                                                                                        */
 /*************************************************************************************************************************/
-extern DMA_Error_t dma_RegisterCallbackFunction(Dma_Id_t Dma , DMA_Stream_t Stream ,DMA_cbf DMA_CallBackFunction);
+extern DMA_Error_t dma_RegisterCallbackFunction(Dma_Id_t Dma , DMA_Stream_t Stream ,DMA_cbf DMA_CallBackFunction , DMA_Event_t Event);
 /*************************************************************************************************************************/
 /* FunctionDiscription  :                                                                                                */
 /* Inputs  : void                                                                                                        */

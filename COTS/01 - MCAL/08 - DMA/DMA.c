@@ -57,7 +57,7 @@ typedef struct{
 
 /*****************************static variables******************************************/
 
-static DMA_cbf CallBack[DMA_Num][dma_Stream_Num];
+static DMA_cbf CallBack[DMA_Num][dma_Stream_Num][dma_Num_Of_Events];
 
 
 /*************************function definition******************************************/
@@ -164,7 +164,7 @@ DMA_Error_t dma_ConfigChannel(Channel_Config_t* Stream_cfg )
 
 }
 
-DMA_Error_t dma_RegisterCallbackFunction(Dma_Id_t Dma , DMA_Stream_t Stream ,DMA_cbf DMA_CallBackFunction)
+DMA_Error_t dma_RegisterCallbackFunction(Dma_Id_t Dma , DMA_Stream_t Stream ,DMA_cbf DMA_CallBackFunction , DMA_Event_t Event)
 {
     DMA_Error_t Local_enuErrorStatus = dma_Ok;
 
@@ -172,10 +172,13 @@ DMA_Error_t dma_RegisterCallbackFunction(Dma_Id_t Dma , DMA_Stream_t Stream ,DMA
 
         Local_enuErrorStatus = dma_NullPointer;
 
+    }else if(Event > dma_Num_Of_Events){
+
+        Local_enuErrorStatus = dma_WrongConfig;
+
     }else{
 
-        CallBack[Dma][Stream] = DMA_CallBackFunction;
-
+        CallBack[Dma][Stream][Event] = DMA_CallBackFunction;
 
     }
 
@@ -230,11 +233,11 @@ void DMA1_Stream0_IRQHandler(void)
 {
     if((DMA1_PTR->LISR) & (1 << dma_TRANFER_COMP_INT_FLAG_0)){
 
-        if(CallBack[DMA1_Id][dma_Stream0]){
+        if(CallBack[DMA1_Id][dma_Stream0][dma_Tranfer_Compelete]){
 
             DMA1_PTR->LIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_0);
 
-            CallBack[DMA1_Id][dma_Stream0]();
+            CallBack[DMA1_Id][dma_Stream0][dma_Tranfer_Compelete]();
 
         }
 
@@ -242,11 +245,11 @@ void DMA1_Stream0_IRQHandler(void)
 
     if((DMA1_PTR->LISR) & (1 << dma_HALF_TRANFER_INT_FLAG_0)){
 
-        if(CallBack[DMA1_Id][dma_Stream0]){
+        if(CallBack[DMA1_Id][dma_Stream0][dma_Half_Tranfer_Compelete]){
 
             DMA1_PTR->LIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_0);
 
-            CallBack[DMA1_Id][dma_Stream0]();
+            CallBack[DMA1_Id][dma_Stream0][dma_Half_Tranfer_Compelete]();
 
         }
 
@@ -259,11 +262,11 @@ void DMA1_Stream1_IRQHandler(void)
 
     if((DMA1_PTR->LISR) & (1 << dma_TRANFER_COMP_INT_FLAG_1)){
 
-        if(CallBack[DMA1_Id][dma_Stream1]){
+        if(CallBack[DMA1_Id][dma_Stream1][dma_Tranfer_Compelete]){
 
             DMA1_PTR->LIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_1);
 
-            CallBack[DMA1_Id][dma_Stream1]();
+            CallBack[DMA1_Id][dma_Stream1][dma_Tranfer_Compelete]();
 
         }
 
@@ -271,11 +274,11 @@ void DMA1_Stream1_IRQHandler(void)
 
     if((DMA1_PTR->LISR) & (1 << dma_HALF_TRANFER_INT_FLAG_1)){
 
-        if(CallBack[DMA1_Id][dma_Stream1]){
+        if(CallBack[DMA1_Id][dma_Stream1][dma_Half_Tranfer_Compelete]){
 
             DMA1_PTR->LIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_1);
 
-            CallBack[DMA1_Id][dma_Stream1]();
+            CallBack[DMA1_Id][dma_Stream1][dma_Half_Tranfer_Compelete]();
 
         }
 
@@ -288,11 +291,11 @@ void DMA1_Stream2_IRQHandler(void)
 
     if((DMA1_PTR->LISR) & (1 << dma_TRANFER_COMP_INT_FLAG_2)){
 
-        if(CallBack[DMA1_Id][dma_Stream2]){
+        if(CallBack[DMA1_Id][dma_Stream2][dma_Tranfer_Compelete]){
 
             DMA1_PTR->LIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_2);
 
-            CallBack[DMA1_Id][dma_Stream2]();
+            CallBack[DMA1_Id][dma_Stream2][dma_Tranfer_Compelete]();
 
         }
 
@@ -300,11 +303,11 @@ void DMA1_Stream2_IRQHandler(void)
 
     if((DMA1_PTR->LISR) & (1 << dma_HALF_TRANFER_INT_FLAG_2)){
 
-        if(CallBack[DMA1_Id][dma_Stream2]){
+        if(CallBack[DMA1_Id][dma_Stream2][dma_Half_Tranfer_Compelete]){
 
             DMA1_PTR->LIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_2);
 
-            CallBack[DMA1_Id][dma_Stream2]();
+            CallBack[DMA1_Id][dma_Stream2][dma_Half_Tranfer_Compelete]();
 
         }
 
@@ -317,11 +320,11 @@ void DMA1_Stream3_IRQHandler(void)
 
     if((DMA1_PTR->LISR) & (1 << dma_TRANFER_COMP_INT_FLAG_3)){
 
-        if(CallBack[DMA1_Id][dma_Stream3]){
+        if(CallBack[DMA1_Id][dma_Stream3][dma_Tranfer_Compelete]){
 
             DMA1_PTR->LIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_3);
 
-            CallBack[DMA1_Id][dma_Stream3]();
+            CallBack[DMA1_Id][dma_Stream3][dma_Tranfer_Compelete]();
 
         }
 
@@ -329,11 +332,11 @@ void DMA1_Stream3_IRQHandler(void)
 
     if((DMA1_PTR->LISR) & (1 << dma_HALF_TRANFER_INT_FLAG_3)){
 
-        if(CallBack[DMA1_Id][dma_Stream3]){
+        if(CallBack[DMA1_Id][dma_Stream3][dma_Half_Tranfer_Compelete]){
 
             DMA1_PTR->LIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_3);
 
-            CallBack[DMA1_Id][dma_Stream3]();
+            CallBack[DMA1_Id][dma_Stream3][dma_Half_Tranfer_Compelete]();
 
         }
 
@@ -346,11 +349,11 @@ void DMA1_Stream4_IRQHandler(void)
 
     if((DMA1_PTR->HISR) & (1 << dma_TRANFER_COMP_INT_FLAG_0)){
 
-        if(CallBack[DMA1_Id][dma_Stream4]){
+        if(CallBack[DMA1_Id][dma_Stream4][dma_Tranfer_Compelete]){
 
             DMA1_PTR->HIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_0);
 
-            CallBack[DMA1_Id][dma_Stream4]();
+            CallBack[DMA1_Id][dma_Stream4][dma_Tranfer_Compelete]();
 
         }
 
@@ -358,11 +361,11 @@ void DMA1_Stream4_IRQHandler(void)
 
     if((DMA1_PTR->HISR) & (1 << dma_HALF_TRANFER_INT_FLAG_0)){
 
-        if(CallBack[DMA1_Id][dma_Stream4]){
+        if(CallBack[DMA1_Id][dma_Stream4][dma_Half_Tranfer_Compelete]){
 
             DMA1_PTR->HIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_0);
 
-            CallBack[DMA1_Id][dma_Stream4]();
+            CallBack[DMA1_Id][dma_Stream4][dma_Half_Tranfer_Compelete]();
 
         }
 
@@ -375,11 +378,11 @@ void DMA1_Stream5_IRQHandler(void)
 
     if((DMA1_PTR->HISR) & (1 << dma_TRANFER_COMP_INT_FLAG_1)){
 
-        if(CallBack[DMA1_Id][dma_Stream5]){
+        if(CallBack[DMA1_Id][dma_Stream5][dma_Tranfer_Compelete]){
 
             DMA1_PTR->HIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_1);
 
-            CallBack[DMA1_Id][dma_Stream5]();
+            CallBack[DMA1_Id][dma_Stream5][dma_Tranfer_Compelete]();
 
         }
 
@@ -387,11 +390,11 @@ void DMA1_Stream5_IRQHandler(void)
 
     if((DMA1_PTR->HISR) & (1 << dma_HALF_TRANFER_INT_FLAG_1)){
 
-        if(CallBack[DMA1_Id][dma_Stream5]){
+        if(CallBack[DMA1_Id][dma_Stream5][dma_Half_Tranfer_Compelete]){
 
             DMA1_PTR->HIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_1);
 
-            CallBack[DMA1_Id][dma_Stream5]();
+            CallBack[DMA1_Id][dma_Stream5][dma_Half_Tranfer_Compelete]();
 
         }
 
@@ -404,11 +407,11 @@ void DMA1_Stream6_IRQHandler(void)
 
     if((DMA1_PTR->HISR) & (1 << dma_TRANFER_COMP_INT_FLAG_2)){
 
-        if(CallBack[DMA1_Id][dma_Stream6]){
+        if(CallBack[DMA1_Id][dma_Stream6][dma_Tranfer_Compelete]){
 
             DMA1_PTR->HIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_2);
 
-            CallBack[DMA1_Id][dma_Stream6]();
+            CallBack[DMA1_Id][dma_Stream6][dma_Tranfer_Compelete]();
 
         }
 
@@ -416,11 +419,11 @@ void DMA1_Stream6_IRQHandler(void)
 
     if((DMA1_PTR->HISR) & (1 << dma_HALF_TRANFER_INT_FLAG_2)){
 
-        if(CallBack[DMA1_Id][dma_Stream6]){
+        if(CallBack[DMA1_Id][dma_Stream6][dma_Half_Tranfer_Compelete]){
 
             DMA1_PTR->HIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_2);
 
-            CallBack[DMA1_Id][dma_Stream6]();
+            CallBack[DMA1_Id][dma_Stream6][dma_Half_Tranfer_Compelete]();
 
         }
 
@@ -433,11 +436,11 @@ void DMA1_Stream7_IRQHandler(void)
 
     if((DMA1_PTR->HISR) & (1 << dma_TRANFER_COMP_INT_FLAG_3)){
 
-        if(CallBack[DMA1_Id][dma_Stream7]){
+        if(CallBack[DMA1_Id][dma_Stream7][dma_Tranfer_Compelete]){
 
             DMA1_PTR->HIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_3);
 
-            CallBack[DMA1_Id][dma_Stream7]();
+            CallBack[DMA1_Id][dma_Stream7][dma_Tranfer_Compelete]();
 
         }
 
@@ -445,11 +448,11 @@ void DMA1_Stream7_IRQHandler(void)
 
     if((DMA1_PTR->HISR) & (1 << dma_HALF_TRANFER_INT_FLAG_3)){
 
-        if(CallBack[DMA1_Id][dma_Stream7]){
+        if(CallBack[DMA1_Id][dma_Stream7][dma_Half_Tranfer_Compelete]){
 
             DMA1_PTR->HIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_3);
 
-            CallBack[DMA1_Id][dma_Stream7]();
+            CallBack[DMA1_Id][dma_Stream7][dma_Half_Tranfer_Compelete]();
 
         }
 
@@ -459,40 +462,232 @@ void DMA1_Stream7_IRQHandler(void)
 /************************************************************************************************/
 void DMA2_Stream0_IRQHandler(void)
 {
+    if((DMA2_PTR->LISR) & (1 << dma_TRANFER_COMP_INT_FLAG_0)){
 
+        if(CallBack[DMA2_Id][dma_Stream0][dma_Tranfer_Compelete]){
+
+            DMA2_PTR->LIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_0);
+
+            CallBack[DMA2_Id][dma_Stream0][dma_Tranfer_Compelete]();
+
+        }
+
+    }
+
+    if((DMA2_PTR->LISR) & (1 << dma_HALF_TRANFER_INT_FLAG_0)){
+
+        if(CallBack[DMA2_Id][dma_Stream0][dma_Half_Tranfer_Compelete]){
+
+            DMA2_PTR->LIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_0);
+
+            CallBack[DMA2_Id][dma_Stream0][dma_Half_Tranfer_Compelete]();
+
+        }
+
+    }    
+    
 }
 
 void DMA2_Stream1_IRQHandler(void)
 {
+
+    if((DMA2_PTR->LISR) & (1 << dma_TRANFER_COMP_INT_FLAG_1)){
+
+        if(CallBack[DMA2_Id][dma_Stream1][dma_Tranfer_Compelete]){
+
+            DMA2_PTR->LIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_1);
+
+            CallBack[DMA2_Id][dma_Stream1][dma_Tranfer_Compelete]();
+
+        }
+
+    }
+
+    if((DMA2_PTR->LISR) & (1 << dma_HALF_TRANFER_INT_FLAG_1)){
+
+        if(CallBack[DMA2_Id][dma_Stream1][dma_Half_Tranfer_Compelete]){
+
+            DMA2_PTR->LIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_1);
+
+            CallBack[DMA2_Id][dma_Stream1][dma_Half_Tranfer_Compelete]();
+
+        }
+
+    } 
     
 }
 
 void DMA2_Stream2_IRQHandler(void)
 {
+
+    if((DMA2_PTR->LISR) & (1 << dma_TRANFER_COMP_INT_FLAG_2)){
+
+        if(CallBack[DMA2_Id][dma_Stream2][dma_Tranfer_Compelete]){
+
+            DMA2_PTR->LIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_2);
+
+            CallBack[DMA2_Id][dma_Stream2][dma_Tranfer_Compelete]();
+
+        }
+
+    }
+
+    if((DMA2_PTR->LISR) & (1 << dma_HALF_TRANFER_INT_FLAG_2)){
+
+        if(CallBack[DMA2_Id][dma_Stream2][dma_Half_Tranfer_Compelete]){
+
+            DMA2_PTR->LIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_2);
+
+            CallBack[DMA2_Id][dma_Stream2][dma_Half_Tranfer_Compelete]();
+
+        }
+
+    }     
     
 }
 
 void DMA2_Stream3_IRQHandler(void)
 {
+
+    if((DMA2_PTR->LISR) & (1 << dma_TRANFER_COMP_INT_FLAG_3)){
+
+        if(CallBack[DMA2_Id][dma_Stream3][dma_Tranfer_Compelete]){
+
+            DMA2_PTR->LIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_3);
+
+            CallBack[DMA2_Id][dma_Stream3][dma_Tranfer_Compelete]();
+
+        }
+
+    }
+
+    if((DMA2_PTR->LISR) & (1 << dma_HALF_TRANFER_INT_FLAG_3)){
+
+        if(CallBack[DMA2_Id][dma_Stream3][dma_Half_Tranfer_Compelete]){
+
+            DMA2_PTR->LIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_3);
+
+            CallBack[DMA2_Id][dma_Stream3][dma_Half_Tranfer_Compelete]();
+
+        }
+
+    }     
     
 }
 
 void DMA2_Stream4_IRQHandler(void)
 {
+
+    if((DMA2_PTR->HISR) & (1 << dma_TRANFER_COMP_INT_FLAG_0)){
+
+        if(CallBack[DMA2_Id][dma_Stream4][dma_Tranfer_Compelete]){
+
+            DMA2_PTR->HIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_0);
+
+            CallBack[DMA2_Id][dma_Stream4][dma_Tranfer_Compelete]();
+
+        }
+
+    }
+
+    if((DMA2_PTR->HISR) & (1 << dma_HALF_TRANFER_INT_FLAG_0)){
+
+        if(CallBack[DMA2_Id][dma_Stream4][dma_Half_Tranfer_Compelete]){
+
+            DMA2_PTR->HIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_0);
+
+            CallBack[DMA2_Id][dma_Stream4][dma_Half_Tranfer_Compelete]();
+
+        }
+
+    }     
     
 }
 
+ 
 void DMA2_Stream5_IRQHandler(void)
 {
+
+    if((DMA2_PTR->HISR) & (1 << dma_TRANFER_COMP_INT_FLAG_1)){
+
+        if(CallBack[DMA2_Id][dma_Stream5][dma_Tranfer_Compelete]){
+
+            DMA2_PTR->HIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_1);
+
+            CallBack[DMA2_Id][dma_Stream5][dma_Tranfer_Compelete]();
+
+        }
+
+    }
+
+    if((DMA2_PTR->HISR) & (1 << dma_HALF_TRANFER_INT_FLAG_1)){
+
+        if(CallBack[DMA2_Id][dma_Stream5][dma_Half_Tranfer_Compelete]){
+
+            DMA2_PTR->HIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_1);
+
+            CallBack[DMA2_Id][dma_Stream5][dma_Half_Tranfer_Compelete]();
+
+        }
+
+    }     
     
 }
 
 void DMA2_Stream6_IRQHandler(void)
 {
+
+    if((DMA2_PTR->HISR) & (1 << dma_TRANFER_COMP_INT_FLAG_2)){
+
+        if(CallBack[DMA2_Id][dma_Stream6][dma_Tranfer_Compelete]){
+
+            DMA2_PTR->HIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_2);
+
+            CallBack[DMA2_Id][dma_Stream6][dma_Tranfer_Compelete]();
+
+        }
+
+    }
+
+    if((DMA2_PTR->HISR) & (1 << dma_HALF_TRANFER_INT_FLAG_2)){
+
+        if(CallBack[DMA2_Id][dma_Stream6][dma_Half_Tranfer_Compelete]){
+
+            DMA2_PTR->HIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_2);
+
+            CallBack[DMA2_Id][dma_Stream6][dma_Half_Tranfer_Compelete]();
+
+        }
+
+    }     
     
 }
 
 void DMA2_Stream7_IRQHandler(void)
 {
+
+    if((DMA2_PTR->HISR) & (1 << dma_TRANFER_COMP_INT_FLAG_3)){
+
+        if(CallBack[DMA2_Id][dma_Stream7][dma_Tranfer_Compelete]){
+
+            DMA2_PTR->HIFCR |= (1<< dma_TRANFER_COMP_INT_FLAG_3);
+
+            CallBack[DMA2_Id][dma_Stream7][dma_Tranfer_Compelete]();
+
+        }
+
+    }
+
+    if((DMA2_PTR->HISR) & (1 << dma_HALF_TRANFER_INT_FLAG_3)){
+
+        if(CallBack[DMA2_Id][dma_Stream7][dma_Half_Tranfer_Compelete]){
+
+            DMA2_PTR->HIFCR |= (1<< dma_HALF_TRANFER_INT_FLAG_3);
+
+            CallBack[DMA2_Id][dma_Stream7][dma_Half_Tranfer_Compelete]();
+
+        }
+
+    } 
     
 }
