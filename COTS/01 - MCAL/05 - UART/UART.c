@@ -5,6 +5,7 @@
 /* Date:2023-03-28                                       */
 /******************************************************************/
 #include "STD_TYPES.h"
+#include "BIT_BAND.h"
 #include "UART.h"
 
 #define uart_TXE_READ_MASK                      0x00000080     // transmit register empty   
@@ -14,6 +15,10 @@
 #define uart_ORE_READ_MASK                      0x00000008     // overrun flag (aka) some data got lost  
 #define uart_FE_READ_MASK                       0x00000002     // framing error  
 #define uart_PE_READ_MASK                       0x00000001     // parity error 
+#define uart_DMA_ENABLE_TRANSMIT                7
+#define uart_DMA_ENABLE_RECIEVER                6
+#define uart_SET_VALUE                          0x1
+#define uart_RESET_VALUE                        0x0
 
 
 static u32 my_ciel(f32 val);
@@ -239,6 +244,39 @@ UART_enuError_t uart_RegisterCallBackFunction(UART_channel_t Copy_enuChannel , U
     }
 
     return Local_enuRes;
+}
+
+
+UART_enuError_t uart_SendBufferDma(void* Uart)
+{
+    UART_enuError_t Local_enuRes = uart_Ok;
+
+    if(Uart == NULL){
+
+        Local_enuRes = uart_NullPtr;
+
+    }else{
+
+        MEM_ADDR(BIT_BAND((u32)&(((UART_t*)(Uart))->CR3) , uart_DMA_ENABLE_TRANSMIT)) = uart_SET_VALUE;
+
+    }
+}
+
+UART_enuError_t uart_RecieveBufferDma(void* Uart)
+{
+
+    UART_enuError_t Local_enuRes = uart_Ok;
+
+    if(Uart == NULL){
+
+        Local_enuRes = uart_NullPtr;
+
+    }else{
+
+        MEM_ADDR(BIT_BAND((u32)&(((UART_t*)(Uart))->CR3) , uart_DMA_ENABLE_RECIEVER)) = uart_SET_VALUE;
+
+    }
+
 }
 
 void USART1_IRQHandler(void)

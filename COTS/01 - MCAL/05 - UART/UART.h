@@ -157,7 +157,18 @@ extern UART_enuError_t uart_RecieveBufferAsych(UART_Reciever_cfg_t * Reciever_cf
 /* Return :  void                                                                                                        */
 /*************************************************************************************************************************/
 extern UART_enuError_t uart_RegisterCallBackFunction(UART_channel_t Copy_enuChannel , UART_Mode_t Copy_enuMode  , Uart_cbf CallBackFunction);
-
+/*************************************************************************************************************************/
+/* FunctionDiscription  :                                                                                                */
+/* Inputs  : void                                                                                                        */
+/* Return :  void                                                                                                        */
+/*************************************************************************************************************************/
+extern UART_enuError_t uart_SendBufferDma(void* Uart);
+/*************************************************************************************************************************/
+/* FunctionDiscription  :                                                                                                */
+/* Inputs  : void                                                                                                        */
+/* Return :  void                                                                                                        */
+/*************************************************************************************************************************/
+extern UART_enuError_t uart_RecieveBufferDma(void* Uart);
 
 
 #endif /*UART_H*/
