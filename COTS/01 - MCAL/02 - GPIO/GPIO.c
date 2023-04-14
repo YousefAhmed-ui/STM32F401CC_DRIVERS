@@ -97,7 +97,7 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         if(Addp_PortInit->GPIO_AlternateFunction){
 
-                        	if(Local_u8Iterator < 7){
+                        	if(Local_u8Iterator < 8){
 
                         		Local_u32AF_Reg = GPIOA->AFRL;
 
@@ -133,7 +133,7 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         if(Addp_PortInit->GPIO_AlternateFunction){
 
-                        	if(Local_u8Iterator < 7){
+                        	if(Local_u8Iterator < 8){
 
                         		Local_u32AF_Reg = GPIOB->AFRL;
 
@@ -168,7 +168,7 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         if(Addp_PortInit->GPIO_AlternateFunction){
 
-                        	if(Local_u8Iterator < 7){
+                        	if(Local_u8Iterator < 8){
 
                         		Local_u32AF_Reg = GPIOC->AFRL;
 
@@ -204,7 +204,7 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         if(Addp_PortInit->GPIO_AlternateFunction){
 
-                        	if(Local_u8Iterator < 7){
+                        	if(Local_u8Iterator < 8){
 
                         		Local_u32AF_Reg = GPIOD->AFRL;
 
@@ -243,7 +243,7 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         if(Addp_PortInit->GPIO_AlternateFunction){
 
-                        	if(Local_u8Iterator < 7){
+                        	if(Local_u8Iterator < 8){
 
                         		Local_u32AF_Reg = GPIOE->AFRL;
 
@@ -280,7 +280,7 @@ GPIO_enuErrorStatus_t gpio_Init(GPIO_strInit_t * Addp_PortInit)
 
                         if(Addp_PortInit->GPIO_AlternateFunction){
 
-                        	if(Local_u8Iterator < 7){
+                        	if(Local_u8Iterator < 8){
 
                         		Local_u32AF_Reg = GPIOH->AFRL;
 
