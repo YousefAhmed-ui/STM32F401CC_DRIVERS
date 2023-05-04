@@ -9,7 +9,7 @@
 #include "UART.h"
 
 #define uart_TXE_READ_MASK                      0x00000080     // transmit register empty   
-#define uart_TC_READ_MASK                       0x00000040     // transmition complete   
+#define uart_TXE_READ_MASK                       0x00000040     // transmition complete   
 #define uart_RXNE_READ_MASK                     0x00000020     // reciever data register not empty  
 #define uart_IDLE_READ_MASK                     0x00000010     // IDLE flag  
 #define uart_ORE_READ_MASK                      0x00000008     // overrun flag (aka) some data got lost  
@@ -281,14 +281,14 @@ UART_enuError_t uart_RecieveBufferDma(void* Uart)
 
 void USART1_IRQHandler(void)
 {
-    if(UART1->SR & uart_TC_READ_MASK){
+    if(UART1->SR & uart_TXE_READ_MASK){
         if(uart_TxBufferindex[uart1_Channel] < uart_TxSize[uart1_Channel]){
 
             UART1->DR = uart_Txbuffer[uart_TxBufferindex[uart1_Channel]];
 
             uart_TxBufferindex[uart1_Channel]++;
 
-            UART1->SR &= ~(uart_TC_READ_MASK);
+            UART1->SR &= ~(uart_TXE_READ_MASK);
 
         }else{
 
@@ -302,7 +302,7 @@ void USART1_IRQHandler(void)
             }
             
 
-            UART1->SR &= ~(uart_TC_READ_MASK);
+            UART1->SR &= ~(uart_TXE_READ_MASK);
 
         }
     }
@@ -336,14 +336,14 @@ void USART1_IRQHandler(void)
 
 void USART2_IRQHandler(void)
 {
-    if(UART2->SR & uart_TC_READ_MASK){
+    if(UART2->SR & uart_TXE_READ_MASK){
         if(uart_TxBufferindex[uart2_Channel] < uart_TxSize[uart2_Channel]){
 
             UART2->DR = uart_Txbuffer[uart_TxBufferindex[uart2_Channel]];
 
             uart_TxBufferindex[uart2_Channel]++;
 
-            UART2->SR &= ~(uart_TC_READ_MASK);
+            UART2->SR &= ~(uart_TXE_READ_MASK);
 
         }else{
 
@@ -357,7 +357,7 @@ void USART2_IRQHandler(void)
             }
             
 
-            UART2->SR &= ~(uart_TC_READ_MASK);
+            UART2->SR &= ~(uart_TXE_READ_MASK);
 
         }
     }
@@ -391,14 +391,14 @@ void USART2_IRQHandler(void)
 
 void USART6_IRQHandler(void)
 {
-    if(UART6->SR & uart_TC_READ_MASK){
+    if(UART6->SR & uart_TXE_READ_MASK){
         if(uart_TxBufferindex[uart6_Channel] < uart_TxSize[uart6_Channel]){
 
             UART6->DR = uart_Txbuffer[uart_TxBufferindex[uart6_Channel]];
 
             uart_TxBufferindex[uart6_Channel]++;
 
-            UART6->SR &= ~(uart_TC_READ_MASK);
+            UART6->SR &= ~(uart_TXE_READ_MASK);
 
         }else{
 
@@ -412,7 +412,7 @@ void USART6_IRQHandler(void)
             }
             
 
-            UART6->SR &= ~(uart_TC_READ_MASK);
+            UART6->SR &= ~(uart_TXE_READ_MASK);
 
         }
     }
