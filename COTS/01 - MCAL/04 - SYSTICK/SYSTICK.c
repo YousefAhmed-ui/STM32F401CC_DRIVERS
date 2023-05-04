@@ -67,11 +67,11 @@ STKError_t stk_SetPeriod_ms(u16 Copy_u16Period , u32 Copy_AHBClock)
     {
         if(STK -> CTRL & stk_CLOCK_SOURCE_AHB )
         {
-            Local_u32LoadReg = (((u64)Copy_u16Period * (u64)Copy_AHBClock))/(8*1000UL);
+            Local_u32LoadReg = (((u64)Copy_u16Period * (u64)Copy_AHBClock))/(1000UL);
         }
         else
         {
-            Local_u32LoadReg = (((u64)Copy_u16Period * (u64)Copy_AHBClock))/(8*8000UL);
+            Local_u32LoadReg = (((u64)Copy_u16Period * (u64)Copy_AHBClock))/(8000UL);
         }
     }
     STK -> LOAD = Local_u32LoadReg;
